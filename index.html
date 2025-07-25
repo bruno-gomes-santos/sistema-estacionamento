@@ -633,15 +633,9 @@
         // --- API CALL ---
         async function apiCall(action, options = {}) {
             if (!APPS_SCRIPT_URL) {
-                // Se a URL não estiver carregada, não podemos fazer chamadas de API, exceto para login.
-                if (action !== 'login') {
-                    showToast("URL do Apps Script não configurada. Salve nas configurações.", "error");
-                    throw new Error("URL do Apps Script não configurada.");
-                }
-                // Para o login, pegamos a URL das configurações primeiro.
                 const storedUrl = localStorage.getItem('appsScriptUrl') || '';
                 if (!storedUrl) {
-                     showToast("URL do Apps Script não configurada. Salve nas configurações.", "error");
+                    showToast("URL do Apps Script não configurada. Salve nas configurações.", "error");
                     throw new Error("URL do Apps Script não configurada.");
                 }
                 APPS_SCRIPT_URL = storedUrl;
