@@ -128,7 +128,29 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <div class="container mx-auto p-4 max-w-6xl">
+    <!-- Tela de Login -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center bg-gray-200 p-4">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
+            <div class="text-center mb-6">
+                <h1 class="text-3xl font-bold text-primary">JCT Parking</h1>
+                <p class="text-gray-500 mt-2">Acesso ao Sistema</p>
+            </div>
+            <div id="login-error" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4 text-sm" role="alert">
+                <span class="block sm:inline">Usuário ou senha inválidos.</span>
+            </div>
+            <div class="space-y-4">
+                <input type="text" id="username-input" placeholder="Usuário" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 ring-primary focus:border-primary text-gray-900">
+                <input type="password" id="password-input" placeholder="Senha" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 ring-primary focus:border-primary text-gray-900">
+                <button id="btn-login" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                    <span class="btn-text">Entrar</span>
+                    <span class="loader-container hidden"><span class="loader"></span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal do Sistema -->
+    <div id="main-content" class="hidden container mx-auto p-4 max-w-6xl">
         <header class="mb-4 relative">
             <button id="hamburger-button" class="md:hidden absolute top-4 left-2 p-2 text-gray-600 z-10">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -136,7 +158,7 @@
         
             <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                 <div class="flex items-center pl-14 md:pl-0">
-                    <img id="header-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAACHdSURBVHhe7Z0JnFVV+sfnA0EExT13V3fX3d1dd3dX7+7u3hVEd3c3d3d3d3d3V3d3d3f33hVEd3eP6iLqKgKiiAgKIrj/5z1zZubMzL1z5s478/z5zHPnnDlz5j3z+8yT9543h8vlEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBK" alt="Logo JCT Parking" class="h-20">
+                    <img id="header-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAACHdSURBVHhe7Z0JnFVV+sfnA0EExT13V3fX3d1dd3dX7+7u3hVEd3c3d3d3d3d3V3d3d3f33hVEd3eP6iLqKgKiiAgKIrj/5z1zZubMzL1z5s478/z5zHPnnDlz5j3z+8yT9543h8vlEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBK" alt="Logo JCT Parking" class="h-20">
                     <div class="ml-4 text-left">
                         <h1 class="text-4xl font-bold text-primary">JCT Parking</h1>
                         <p class="text-gray-500 mt-2">Sistema de Gestão Profissional</p>
@@ -173,6 +195,10 @@
                 <button class="tab-button text-gray-600 hover:text-gray-800 py-4 px-6 text-sm font-medium" data-tab="mensalistas">Gestão de Mensalistas</button>
                 <button class="tab-button text-gray-600 hover:text-gray-800 py-4 px-6 text-sm font-medium" data-tab="historico">Histórico</button>
                 <button class="tab-button text-gray-600 hover:text-gray-800 py-4 px-6 text-sm font-medium" data-tab="relatorios">Relatórios e Configurações</button>
+                <button id="btn-logout" class="ml-auto text-gray-600 hover:text-red-600 py-4 px-6 text-sm font-medium flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Sair
+                </button>
             </nav>
         </div>
 
@@ -383,6 +409,7 @@
             <a href="#" class="mobile-nav-link text-lg text-gray-700 hover:text-primary hover:bg-gray-100 p-3 rounded-md" data-tab="mensalistas">Gestão de Mensalistas</a>
             <a href="#" class="mobile-nav-link text-lg text-gray-700 hover:text-primary hover:bg-gray-100 p-3 rounded-md" data-tab="historico">Histórico</a>
             <a href="#" class="mobile-nav-link text-lg text-gray-700 hover:text-primary hover:bg-gray-100 p-3 rounded-md" data-tab="relatorios">Relatórios e Configurações</a>
+            <a href="#" id="btn-logout-mobile" class="text-lg text-gray-700 hover:text-red-600 hover:bg-gray-100 p-3 rounded-md mt-4">Sair</a>
         </nav>
     </div>
 
@@ -450,6 +477,14 @@
 
         // --- DOM ELEMENT SELECTORS ---
         const ui = {
+            loginScreen: document.getElementById('login-screen'),
+            mainContent: document.getElementById('main-content'),
+            usernameInput: document.getElementById('username-input'),
+            passwordInput: document.getElementById('password-input'),
+            btnLogin: document.getElementById('btn-login'),
+            loginError: document.getElementById('login-error'),
+            btnLogout: document.getElementById('btn-logout'),
+            btnLogoutMobile: document.getElementById('btn-logout-mobile'),
             tabsContainer: document.getElementById('tabs-container'),
             hamburgerButton: document.getElementById('hamburger-button'),
             mobileMenu: document.getElementById('mobile-menu'),
@@ -597,7 +632,21 @@
 
         // --- API CALL ---
         async function apiCall(action, options = {}) {
-            if (!APPS_SCRIPT_URL) throw new Error("URL do Google Apps Script não configurada.");
+            if (!APPS_SCRIPT_URL) {
+                // Se a URL não estiver carregada, não podemos fazer chamadas de API, exceto para login.
+                if (action !== 'login') {
+                    showToast("URL do Apps Script não configurada. Salve nas configurações.", "error");
+                    throw new Error("URL do Apps Script não configurada.");
+                }
+                // Para o login, pegamos a URL das configurações primeiro.
+                const storedUrl = localStorage.getItem('appsScriptUrl') || '';
+                if (!storedUrl) {
+                     showToast("URL do Apps Script não configurada. Salve nas configurações.", "error");
+                    throw new Error("URL do Apps Script não configurada.");
+                }
+                APPS_SCRIPT_URL = storedUrl;
+            }
+
             const { method = 'GET', body = null, params = {} } = options;
             let url = new URL(APPS_SCRIPT_URL);
             let finalOptions = { redirect: 'follow' };
@@ -693,12 +742,7 @@
             ui.valorDiariaMoto.value = (PRECOS.moto.diaria || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2});
             ui.precoLavagemMoto.value = (PRECOS.moto.lavagem || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2});
 
-            if (APPS_SCRIPT_URL) {
-                showTab('operacao');
-            } else {
-                showToast("Bem-vindo! Configure a URL do Apps Script para começar.", 'info');
-                showTab('relatorios');
-            }
+            // Não mostra nenhuma aba por padrão, espera o login
         }
 
         // --- DAILY OPERATIONS ---
@@ -807,7 +851,6 @@
                 <p><strong>Modelo/Cor:</strong> ${modelo || 'N/A'} ${cor}</p>
                 <p><strong>Tipo Veículo:</strong> ${tipoVeiculo}</p>
                 <p><strong>Entrada:</strong> ${new Date(entrada).toLocaleString('pt-BR')}</p>
-                <p><strong>Cliente:</strong> ${tipo}</p>
             `;
             ui.entradaModal.classList.add('is-open');
         }
@@ -1395,9 +1438,66 @@
             }
         }
 
+        // --- LOGIN & LOGOUT ---
+        async function handleLogin() {
+            const username = ui.usernameInput.value.trim();
+            const password = ui.passwordInput.value.trim();
+
+            if (!username || !password) {
+                showToast("Preencha usuário e senha.", "error");
+                return;
+            }
+            
+            setLoading(ui.btnLogin, true);
+            ui.loginError.classList.add('hidden');
+
+            try {
+                const result = await apiCall('login', {
+                    method: 'POST',
+                    body: { username, password }
+                });
+
+                if (result.success) {
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    ui.loginScreen.classList.add('hidden');
+                    ui.mainContent.classList.remove('hidden');
+                    carregarConfiguracoes(); // Carrega as configs após o login
+                    showTab('operacao'); // Mostra a primeira aba
+                } else {
+                    ui.loginError.classList.remove('hidden');
+                }
+            } catch (error) {
+                showToast(error.message, 'error');
+                ui.loginError.classList.remove('hidden');
+            } finally {
+                setLoading(ui.btnLogin, false);
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('isLoggedIn');
+            location.reload();
+        }
+
         // --- INIT & EVENT LISTENERS ---
         function init() {
-            carregarConfiguracoes();
+            if (sessionStorage.getItem('isLoggedIn') === 'true') {
+                ui.loginScreen.classList.add('hidden');
+                ui.mainContent.classList.remove('hidden');
+                carregarConfiguracoes();
+                showTab('operacao');
+            } else {
+                ui.loginScreen.classList.remove('hidden');
+                ui.mainContent.classList.add('hidden');
+            }
+
+            // --- Login Listeners ---
+            ui.btnLogin.addEventListener('click', handleLogin);
+            ui.passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleLogin();
+            });
+            ui.btnLogout.addEventListener('click', handleLogout);
+            ui.btnLogoutMobile.addEventListener('click', handleLogout);
 
             // --- Confirmation Modal Listeners ---
             ui.confirmYes.addEventListener('click', async () => {
